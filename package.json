@@ -17,12 +17,20 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "postgres": "docker-compose --env-file .env up -d",
+    "proto:install": "yarn add git+https://github.com/YoungProducer/grpc-nest-proto.git",
+    "proto:cli": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto.cmd -I=./node_modules/grpc-nest-proto/proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
+    "proto:auth": "mkdir src\\auth\\proto && yarn proto:cli --ts_proto_out=src/auth/proto node_modules/grpc-nest-proto/proto/auth.proto"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.8.14",
+    "@grpc/proto-loader": "^0.7.6",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/microservices": "^9.4.0",
     "@nestjs/platform-express": "^9.0.0",
+    "grpc-nest-proto": "git+https://github.com/YoungProducer/grpc-nest-proto.git",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },
@@ -46,6 +54,7 @@
     "ts-jest": "29.0.5",
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
+    "ts-proto": "^1.146.0",
     "tsconfig-paths": "4.2.0",
     "typescript": "^4.7.4"
   },
