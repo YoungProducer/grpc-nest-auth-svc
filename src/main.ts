@@ -1,8 +1,23 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { protobufPackage } from './proto/auth.pb';
+import { Transport } from '@nestjs/microservices';
+import { join } from 'node:path';
+import { INestMicroservice } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  const app: INestMicroservice = await NestFactory.createMicroservice(
+    AppModule,
+    {
+      transport: Transport.GRPC,
+      options: {
+        url: '0.0.0.0:50051',
+        package: protobufPackage,
+        protoPath: join('node_modules/grpc-nest-proto/proto/auth.proto'),
+      },
+    },
+  );
+
+  await app.listen();
 }
 bootstrap();
