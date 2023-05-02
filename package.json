@@ -21,7 +21,7 @@
     "postgres": "docker-compose --env-file .env up -d",
     "proto:install": "yarn add git+https://github.com/YoungProducer/grpc-nest-proto.git",
     "proto:cli": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto.cmd -I=./node_modules/grpc-nest-proto/proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
-    "proto:auth": "mkdir src\\auth\\proto && yarn proto:cli --ts_proto_out=src/auth/proto node_modules/grpc-nest-proto/proto/auth.proto"
+    "proto:auth": "mkdir src\\proto && yarn proto:cli --ts_proto_out=src/proto node_modules/grpc-nest-proto/proto/auth.proto"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.8.14",
@@ -31,9 +31,13 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/microservices": "^9.4.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/typeorm": "^9.0.1",
     "grpc-nest-proto": "git+https://github.com/YoungProducer/grpc-nest-proto.git",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "typeorm": "^0.3.15"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
