@@ -23,7 +23,12 @@ export interface LoginRequest {
 export interface LoginResponse {
   status: number;
   error: string;
+  data: LoginResponse_Data | undefined;
+}
+
+export interface LoginResponse_Data {
   accessToken: string;
+  refreshToken: string;
 }
 
 export interface ValidateRequest {
@@ -33,7 +38,29 @@ export interface ValidateRequest {
 export interface ValidateResponse {
   status: number;
   error: string;
-  userId: number;
+  data: ValidateResponse_Data | undefined;
+}
+
+export interface ValidateResponse_Data {
+  id: number;
+  username: string;
+  email: string;
+}
+
+/** Refresh */
+export interface RefreshRequest {
+  refreshToken: string;
+}
+
+export interface RefreshResponse {
+  status: number;
+  error: string;
+  data: RefreshResponse_Data | undefined;
+}
+
+export interface RefreshResponse_Data {
+  accessToken: string;
+  refreshToken: string;
 }
 
 export const AUTH_PACKAGE_NAME = "auth";
@@ -44,6 +71,8 @@ export interface AuthServiceClient {
   login(request: LoginRequest): Observable<LoginResponse>;
 
   validate(request: ValidateRequest): Observable<ValidateResponse>;
+
+  refresh(request: RefreshRequest): Observable<RefreshResponse>;
 }
 
 export interface AuthServiceController {
@@ -52,11 +81,13 @@ export interface AuthServiceController {
   login(request: LoginRequest): Promise<LoginResponse> | Observable<LoginResponse> | LoginResponse;
 
   validate(request: ValidateRequest): Promise<ValidateResponse> | Observable<ValidateResponse> | ValidateResponse;
+
+  refresh(request: RefreshRequest): Promise<RefreshResponse> | Observable<RefreshResponse> | RefreshResponse;
 }
 
 export function AuthServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["register", "login", "validate"];
+    const grpcMethods: string[] = ["register", "login", "validate", "refresh"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("AuthService", method)(constructor.prototype[method], method, descriptor);

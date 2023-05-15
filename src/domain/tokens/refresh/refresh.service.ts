@@ -8,13 +8,13 @@ import { randomStringGenerator } from '@nestjs/common/utils/random-string-genera
 import { Repository } from 'typeorm';
 import { RefreshTokenEntity } from '../entities/refresh-token.entity';
 import { refreshErrorMessages } from './constants/error-messages';
-import { UserEntity } from 'src/domain/auth/entities/user.entity';
+import { AuthUserEntity } from 'src/domain/auth/entities/user.entity';
 
 @Injectable()
 export class RefreshService {
   constructor(
-    @InjectRepository(UserEntity)
-    private readonly usersRepository: Repository<UserEntity>,
+    @InjectRepository(AuthUserEntity)
+    private readonly usersRepository: Repository<AuthUserEntity>,
 
     @InjectRepository(RefreshTokenEntity)
     private readonly refreshTokensRepository: Repository<RefreshTokenEntity>,
