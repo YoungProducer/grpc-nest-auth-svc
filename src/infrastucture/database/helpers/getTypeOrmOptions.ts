@@ -2,16 +2,13 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 import { entitiesPath, migrationsPath } from './paths';
 import { ConfigService } from '@nestjs/config';
+import { PostgreConfig } from 'src/config/configuration';
 
 export const getTypeOrmOptions = (
-  configService: ConfigService,
+  config: ConfigService,
 ): TypeOrmModuleOptions => ({
   type: 'postgres',
-  host: configService.get<string>('DB_HOST'),
-  port: +configService.get<number>('DB_EXTERNAL_PORT'),
-  username: configService.get<string>('DB_USERNAME'),
-  password: configService.get<string>('DB_PASSWORD'),
-  database: configService.get<string>('DB_NAME'),
+  ...config.get<PostgreConfig>('postgre'),
   entities: [entitiesPath],
   migrations: [migrationsPath],
   migrationsTableName: 'migrations',

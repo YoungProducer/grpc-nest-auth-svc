@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: grpc_auth
+    image: postgres:15.0-alpine
+    restart: on-failure
+    environment:
+      - POSTGRES_USER=${PG_USERNAME}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_NAME}
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - ${PG_EXTERNAL_PORT}:${PG_PORT}
