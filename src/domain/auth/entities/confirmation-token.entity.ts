@@ -23,6 +23,12 @@ export class ConfirmationTokenEntity extends BaseEntity {
   })
   user: AuthUserEntity;
 
+  @Column({
+    type: 'timestamptz',
+    precision: 3,
+  })
+  expirationDate: Date;
+
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',
