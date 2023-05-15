@@ -12,7 +12,7 @@ export interface RegisterRequest {
 
 export interface RegisterResponse {
   status: number;
-  error: string[];
+  error: string;
 }
 
 export interface LoginRequest {
@@ -22,7 +22,7 @@ export interface LoginRequest {
 
 export interface LoginResponse {
   status: number;
-  error: string[];
+  error: string;
   accessToken: string;
 }
 
@@ -32,7 +32,7 @@ export interface ValidateRequest {
 
 export interface ValidateResponse {
   status: number;
-  error: string[];
+  error: string;
   userId: number;
 }
 

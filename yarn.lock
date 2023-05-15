@@ -2817,7 +2817,7 @@ grapheme-splitter@^1.0.4:
 
 "grpc-nest-proto@git+https://github.com/YoungProducer/grpc-nest-proto.git":
   version "1.0.0"
-  resolved "git+https://github.com/YoungProducer/grpc-nest-proto.git#c1d434c56a5713e56561caa9e03648b0af61cf8b"
+  resolved "git+https://github.com/YoungProducer/grpc-nest-proto.git#f6dee2e9cceeacc440a2b1cf3a7274a3be0e4fe4"
 
 has-flag@^3.0.0:
   version "3.0.0"
