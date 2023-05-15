@@ -12,15 +12,21 @@ import {
 import { ConfirmationTokenEntity } from './confirmation-token.entity';
 import { RefreshTokenEntity } from 'src/domain/tokens/entities/refresh-token.entity';
 
-@Entity('users')
-export class UserEntity extends BaseEntity {
+@Entity('auth_users')
+export class AuthUserEntity extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column('varchar')
+  @Column({
+    type: 'varchar',
+    unique: true,
+  })
   username: string;
 
-  @Column('varchar')
+  @Column({
+    type: 'varchar',
+    unique: true,
+  })
   email: string;
 
   @Column('varchar')

@@ -7,7 +7,7 @@ import {
   OneToOne,
   UpdateDateColumn,
 } from 'typeorm';
-import { UserEntity } from './user.entity';
+import { AuthUserEntity } from './user.entity';
 
 @Entity('confirmation_tokens')
 export class ConfirmationTokenEntity extends BaseEntity {
@@ -17,11 +17,11 @@ export class ConfirmationTokenEntity extends BaseEntity {
   @Column('varchar')
   token: string;
 
-  @OneToOne(() => UserEntity, (user) => user.confirmationToken, {
+  @OneToOne(() => AuthUserEntity, (user) => user.confirmationToken, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
   })
-  user: UserEntity;
+  user: AuthUserEntity;
 
   @CreateDateColumn({
     type: 'timestamp',
