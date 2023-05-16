@@ -26,7 +26,9 @@
     "proto:install": "yarn add git+https://github.com/YoungProducer/grpc-nest-proto.git",
     "proto:cli": "protoc --plugin=node_modules/.bin/protoc-gen-ts_proto.cmd -I=./node_modules/grpc-nest-proto/proto --ts_proto_opt=nestJs=true --ts_proto_opt=fileSuffix=.pb",
     "proto:prepare": "rimraf src/proto && mkdir src\\proto",
-    "proto:auth": "yarn proto:prepare && yarn proto:cli --ts_proto_out=src/proto node_modules/grpc-nest-proto/proto/auth.proto"
+    "proto:auth": "yarn proto:cli --ts_proto_out=src/proto node_modules/grpc-nest-proto/proto/auth.proto",
+    "proto:event-broker": "yarn proto:cli --ts_proto_out=src/proto node_modules/grpc-nest-proto/proto/event-broker.proto",
+    "proto:all": "yarn proto:prepare && yarn proto:auth && yarn proto:event-broker"
   },
   "dependencies": {
     "@grpc/grpc-js": "^1.8.14",
